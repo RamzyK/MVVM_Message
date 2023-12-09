@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MessagingApp</string>
+    <string name="icone_of_the_user">icone of the user</string>
+    <string name="user_name_formatted_dispay">%1$s %2$s</string>
+    <string name="messages_count_formatted_display">%1d message(s)</string>
+    <string name="en_ligne">En ligne</string>
+    <string name="back_button_to_quit_the_conversation_activity">Quit the conversation activity</string>
+    <string name="icon_to_start_a_video_call">Icon to start a video call</string>
+    <string name="icon_to_start_a_phone_call">icon to start a phone call</string>
+    <string name="icon_to_get_to_the_parameters_of_the_conversation">Icon to get to the parameters of the conversation</string>
+    <string name="crivez_un_message">Écrivez un message</string>
+    <string name="icon_to_send_vocal_message">Icon to send vocal message</string>
+    <string name="ramzy_kermad">Ramzy Kermad</string>
+    <string name="hello_this_is_a_message">Hello, this is a message</string>
+    <string name="start_new_conversation">Start new conversation</string>
+    <string name="_99">99+</string>
+    <plurals name="messages_count_formatted_display">
+        <item quantity="one">%1d</item>
+
+        <item quantity="other">%1d</item>
+    </plurals>
+</resources>
