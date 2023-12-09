@@ -1,3 +1,5 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/RamzyK/MVVM_Message/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/RamzyK/MVVM_Message/tree/master)
+
 # MockMessenger: Android MVVM Messaging App
 
 MockMessenger is a simple messaging application for Android, written in Kotlin, designed to serve as a practical example for implementing the Model-View-ViewModel (MVVM) architecture in Android development. This project provides a mock environment for messaging, allowing developers to understand and implement key MVVM concepts in their own Android applications.
