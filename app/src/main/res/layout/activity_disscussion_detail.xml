@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient"
+    tools:context=".view.ConversationDetailActivity"
+    android:weightSum="1">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/bg_gradient"
+        android:layout_weight="0.2">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:src="@drawable/ic_back_arrow"
+                android:background="@null"
+                android:contentDescription="@string/back_button_to_quit_the_conversation_activity"/>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/user_profile_picture_card"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:elevation="12dp"
+                app:cardCornerRadius="90dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintLeft_toRightOf="@+id/back_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+                <ImageView
+                    android:id="@+id/user_picture_iv"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/icone_of_the_user">
+                </ImageView>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/user_complete_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Ramzy Kermad"
+                android:textColor="@color/black"
+                app:layout_constraintLeft_toRightOf="@+id/user_profile_picture_card"
+                app:layout_constraintTop_toTopOf="@+id/user_profile_picture_card"
+                android:layout_marginStart="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="@string/en_ligne"
+                android:textColor="@color/black"
+                app:layout_constraintLeft_toLeftOf="@+id/user_complete_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/user_complete_name_tv"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/phone_call_image_button"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_conversation_video_call"
+                    android:background="@null"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/icon_to_start_a_video_call" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="0dp"/>
+
+                <ImageButton
+                    android:id="@+id/video_call_image_button"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_conversation_phone_call"
+                    android:background="@null"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/icon_to_start_a_phone_call" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="0dp"/>
+
+                <ImageButton
+                    android:id="@+id/parameters_image_button"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_conversation_parameters_dots"
+                    android:background="@null"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/icon_to_get_to_the_parameters_of_the_conversation" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messages_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:itemCount="3"
+        tools:listitem="@layout/correspondant_message_bubble_layout"
+        android:layout_weight="0.8"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/black"
+        android:gravity="center|start"
+
+        android:weightSum="1">
+
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="0dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            app:cardCornerRadius="30dp"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/new_message_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autofillHints="name"
+                android:background="@color/edit_text_bg"
+                android:hint="@string/crivez_un_message"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:imeOptions="actionSend"
+                android:inputType="text"
+                android:keyboardNavigationCluster="true"
+                android:padding="8dp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="0dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="@color/white">
+
+            <ImageView
+                android:id="@+id/vocal_message_button"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/icons8_microphone_96___"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/icon_to_send_vocal_message" />
+
+        </androidx.cardview.widget.CardView>
+
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="0dp"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

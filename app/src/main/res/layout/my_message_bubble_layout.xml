@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_gravity="end">
+
+    <LinearLayout
+        android:id="@+id/bubble_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/my_bubble_background"
+        app:layout_constraintWidth_max="200dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/bubble_message_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textStyle="normal"
+            android:padding="8dp"
+            android:text="@string/hello_this_is_a_message"
+            android:textColor="#000" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
