@@ -11,7 +11,7 @@ import org.koin.dsl.module
 
 internal val coreModules = module {
     // Inject a singleton for the user repo
-    single { UsersRepository(get()) }
+    single { UsersRepository(get(), get()) }
     single { ConversationRepository(get()) }
 
 

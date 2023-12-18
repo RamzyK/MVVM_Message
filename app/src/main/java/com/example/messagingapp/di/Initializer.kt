@@ -1,10 +1,12 @@
 package com.example.messagingapp.di
 
+import android.app.Application
 import android.content.Context
 import com.example.messagingapp.BuildConfig
 import com.example.messagingapp.di.modules.FakerJsonConf
 import com.example.messagingapp.di.modules.coreModules
 import com.example.messagingapp.di.modules.remoteModule
+import com.example.messagingapp.di.modules.roomDbModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
@@ -29,4 +31,4 @@ fun parseConfigurationAndAddItToInjectionModules() {
     })
 }
 
-private val modules = mutableListOf(coreModules, remoteModule)
+private val modules = mutableListOf(roomDbModules, coreModules, remoteModule)
