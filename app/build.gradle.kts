@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -87,12 +88,12 @@ dependencies {
 
     // Rx
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
+    implementation("androidx.room:room-rxjava3:2.6.1")
 
     // Koin DI
     implementation("io.insert-koin:koin-core:3.5.0")
     implementation("io.insert-koin:koin-android:3.5.0")
 
-
-
-
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 }
