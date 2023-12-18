@@ -3,11 +3,13 @@ package com.example.messagingapp.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.messagingapp.db.AppDatabase
 import com.example.messagingapp.model.CompleteUserDto
 import com.example.messagingapp.model.conversation_model.MessageData
 import com.example.messagingapp.model.user_model.UserData
 import com.example.messagingapp.repositories.ConversationRepository
 import com.example.messagingapp.repositories.UsersRepository
+import com.example.messagingapp.utils.mapDataFromDatabase
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.Observables
@@ -16,6 +18,12 @@ import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.PublishSubject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.coroutineContext
 import kotlin.random.Random
 
 class UsersViewModel(
@@ -39,7 +47,9 @@ class UsersViewModel(
 
     init {
         //
-        this.getUsersInfosAndConversation(1, 2)
+        CoroutineScope(Dispatchers.Main).launch {
+            this@UsersViewModel.getUsersInfosAndConversation(1, 2)
+        }
     }
 
     private fun getFixedSizeOfRandomUsers(count: Int) {
@@ -64,21 +74,34 @@ class UsersViewModel(
         }).addTo(disposeBag)
     }
 
-    fun getUsersInfosAndConversation(usersToFetch: Int, messagesByConversation: Int) {
-        this.getConversations(usersToFetch, messagesByConversation) {
-            Log.d("Conversations loaded", "Loaded $usersToFetch random conversations")
-        }
-        this.getFixedSizeOfRandomUsers(usersToFetch)
-        Observables
-            .combineLatest(this.usersData, this.usersConversations)
-            .observeOn(Schedulers.io())
-            .subscribeBy {(users, conversations) ->
-                val completeUsersMappedData = users.zip(conversations) { userInfos, conversation ->
-                    CompleteUserDto(userInfos, conversation)
+    suspend fun getUsersInfosAndConversation(usersToFetch: Int, messagesByConversation: Int) {
+        withContext(Dispatchers.IO) {
+            val users = usersRepo.getLocalUserFromRoomDb()
+            if(users.isNotEmpty()) {
+                val mappedUserFromDbToModel = users.map {
+                    mapDataFromDatabase(it)
                 }
-                this.completeUsersList.postValue(completeUsersMappedData)
-            }.let {
-                this.disposeBag.add(it)
+                this@UsersViewModel.completeUsersList.postValue(mappedUserFromDbToModel)
+            } else {
+                this@UsersViewModel.getConversations(usersToFetch, messagesByConversation) {
+                    Log.d("Conversations loaded", "Loaded $usersToFetch random conversations")
+                }
+                this@UsersViewModel.getFixedSizeOfRandomUsers(usersToFetch)
+                Observables
+                    .combineLatest(
+                        this@UsersViewModel.usersData,
+                        this@UsersViewModel.usersConversations
+                    ).observeOn(Schedulers.io())
+                    .subscribeBy {(users, conversations) ->
+                        val completeUsersMappedData = users.zip(conversations) { userInfos, conversation ->
+                            CompleteUserDto(userInfos, conversation)
+                        }
+                        this@UsersViewModel.completeUsersList.postValue(completeUsersMappedData)
+                        this@UsersViewModel.usersRepo.saveUsersToLocalStorage(completeUsersMappedData)
+                    }.let {
+                        this@UsersViewModel.disposeBag.add(it)
+                    }
             }
+        }
     }
 }
