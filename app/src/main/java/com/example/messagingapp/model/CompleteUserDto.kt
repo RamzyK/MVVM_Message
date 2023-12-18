@@ -1,5 +1,6 @@
 package com.example.messagingapp.model
 
+import com.example.messagingapp.db.entities.CompleteUser
 import com.example.messagingapp.model.conversation_model.MessageData
 import com.example.messagingapp.model.user_model.UserData
 

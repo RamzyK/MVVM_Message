@@ -16,6 +16,9 @@ import com.example.messagingapp.model.user_model.UserData
 import com.example.messagingapp.view.adapters.ConversationsListAdapter
 import com.example.messagingapp.view.adapters.OnConversationClicked
 import com.example.messagingapp.viewmodel.UsersViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -39,7 +42,9 @@ class ConversationActivity : AppCompatActivity(), OnConversationClicked {
         this.swipeToRefreshLayout = findViewById(R.id.swipe_to_refresh_layout)
 
         this.swipeToRefreshLayout.setOnRefreshListener {
-            this.usersViewModel.getUsersInfosAndConversation(5, 10)
+            CoroutineScope(Dispatchers.Main).launch {
+                this@ConversationActivity.usersViewModel.getUsersInfosAndConversation(5, 10)
+            }
         }
 
         this.observeUserLiveData()
