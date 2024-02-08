@@ -3,8 +3,8 @@ package com.example.messagingapp.model.conversation_model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class MessageData(val isMyMessage: Boolean,
-                       val message: String
+data class MessageDataDto(val isMyMessage: Boolean,
+                          val message: String
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readByte() != 0.toByte(),
@@ -20,12 +20,12 @@ data class MessageData(val isMyMessage: Boolean,
 
     }
 
-    companion object CREATOR : Parcelable.Creator<MessageData> {
-        override fun createFromParcel(parcel: Parcel): MessageData {
-            return MessageData(parcel)
+    companion object CREATOR : Parcelable.Creator<MessageDataDto> {
+        override fun createFromParcel(parcel: Parcel): MessageDataDto {
+            return MessageDataDto(parcel)
         }
 
-        override fun newArray(size: Int): Array<MessageData?> {
+        override fun newArray(size: Int): Array<MessageDataDto?> {
             return arrayOfNulls(size)
         }
     }

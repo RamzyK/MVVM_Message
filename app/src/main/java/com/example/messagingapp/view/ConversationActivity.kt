@@ -11,7 +11,7 @@ import com.example.messagingapp.R
 import com.example.messagingapp.di.parseConfigurationAndAddItToInjectionModules
 import com.example.messagingapp.di.injectModuleDependencies
 import com.example.messagingapp.model.CompleteUserDto
-import com.example.messagingapp.model.user_model.UserData
+import com.example.messagingapp.model.user_model.UserDataDto
 import com.example.messagingapp.view.adapters.ConversationsListAdapter
 import com.example.messagingapp.view.adapters.OnConversationClicked
 import com.example.messagingapp.viewmodel.UsersViewModel
@@ -67,12 +67,12 @@ class ConversationActivity : AppCompatActivity(), OnConversationClicked {
         usersListRv.adapter = conversationAdapter
     }
 
-    override fun displayConversation(userData: UserData) {
+    override fun displayConversation(userDataDto: UserDataDto) {
         Intent(
             this,
             ConversationDetailActivity::class.java
         ).also {
-            this.usersViewModel.currentUserId = userData.id
+            this.usersViewModel.currentUserId = userDataDto.id
             startActivity(it)
         }
     }

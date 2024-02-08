@@ -6,12 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.messagingapp.db.daos.CompleteUserDao
 import com.example.messagingapp.db.daos.MessagesDao
-import com.example.messagingapp.db.entities.CompleteUser
-import com.example.messagingapp.db.entities.Messages
+import com.example.messagingapp.db.entities.CompleteUserEntity
+import com.example.messagingapp.db.entities.MessageEntity
 
 private const val LOCAL_ROOM_DB_NAME = "messaging_app_room_db"
 @Database(
-    entities = [CompleteUser::class, Messages::class],
+    entities = [CompleteUserEntity::class, MessageEntity::class],
     version = 2,
     exportSchema = true)
 abstract class AppDatabase: RoomDatabase() {

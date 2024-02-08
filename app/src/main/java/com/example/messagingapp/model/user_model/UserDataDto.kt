@@ -1,6 +1,6 @@
 package com.example.messagingapp.model.user_model
 
-data class UserData(
+data class UserDataDto(
     val id: String,
     val profilePicture: Int,
     val lastName: String,

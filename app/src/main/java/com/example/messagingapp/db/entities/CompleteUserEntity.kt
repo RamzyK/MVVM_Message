@@ -3,10 +3,9 @@ package com.example.messagingapp.db.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.Relation
 
-@Entity(tableName = "complete_users")
-data class CompleteUser(
+@Entity(tableName = "users")
+data class CompleteUserEntity(
     @PrimaryKey(autoGenerate = false)
     val userId: String = "",
     @ColumnInfo(name = "user_name")

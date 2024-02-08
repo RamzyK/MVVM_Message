@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.messagingapp.R
 import com.example.messagingapp.model.CompleteUserDto
-import com.example.messagingapp.model.conversation_model.MessageData
-import com.example.messagingapp.model.user_model.UserData
+import com.example.messagingapp.model.conversation_model.MessageDataDto
+import com.example.messagingapp.model.user_model.UserDataDto
 
 class ConversationsListAdapter(
     private val users: List<CompleteUserDto>,
@@ -43,7 +43,7 @@ class ConversationsListAdapter(
             .into(holder.userProfilePictureIv)
     }
 
-    private fun formatLastMessage(data: MessageData): String {
+    private fun formatLastMessage(data: MessageDataDto): String {
         return if(data.isMyMessage) "Moi: ${data.message}" else data.message
     }
 
@@ -64,5 +64,5 @@ class ConversationsListAdapter(
 }
 
 interface OnConversationClicked {
-    fun displayConversation(userData: UserData)
+    fun displayConversation(userDataDto: UserDataDto)
 }

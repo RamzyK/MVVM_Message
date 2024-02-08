@@ -18,10 +18,7 @@ interface UserApiService {
      *
      * @param userName: Random user name
      * @param userLastName: Random user last name
-     * @param userLastSeenDate: Random date object representing the last time user has been seen.
-     * @param status: User status random text.
      * @param phoneNumber: User random phone number
-     * @param isPremium: Random boolean to know if a user has subscribed to premium account
      */
     @GET("custom")
     fun getOneRandomUserData(
@@ -31,9 +28,6 @@ interface UserApiService {
         @Query("profilePicture") profilePicture: String,
         @Query("name") userName: String,
         @Query("lastName") userLastName: String,
-        @Query("lastSeenDate") userLastSeenDate: String,
-        @Query("statusDescription") status: String,
         @Query("phoneNumber") phoneNumber: String,
-        @Query("isPremium") isPremium: String
     ): Flowable<FakeUserDto>
 }

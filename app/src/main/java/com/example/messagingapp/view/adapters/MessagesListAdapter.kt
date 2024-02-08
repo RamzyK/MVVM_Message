@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.messagingapp.R
-import com.example.messagingapp.model.conversation_model.MessageData
+import com.example.messagingapp.model.conversation_model.MessageDataDto
 import com.example.messagingapp.viewmodel.UsersViewModel
 
 const val MY_MESSAGE_BUBBLE_TYPE = 1
@@ -16,7 +16,7 @@ class MessagesListAdapter(
     private val usersViewModel: UsersViewModel
 ): RecyclerView.Adapter<MessagesListAdapter.MessageCellViewHolder>() {
 
-    private var messages: MutableList<MessageData> = mutableListOf()
+    private var messages: MutableList<MessageDataDto> = mutableListOf()
 
     init {
         updateMessagesToDisplay()

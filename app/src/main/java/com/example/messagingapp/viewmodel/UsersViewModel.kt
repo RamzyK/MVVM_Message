@@ -3,28 +3,22 @@ package com.example.messagingapp.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.messagingapp.db.AppDatabase
 import com.example.messagingapp.model.CompleteUserDto
-import com.example.messagingapp.model.conversation_model.MessageData
-import com.example.messagingapp.model.user_model.UserData
+import com.example.messagingapp.model.conversation_model.MessageDataDto
+import com.example.messagingapp.model.user_model.UserDataDto
 import com.example.messagingapp.repositories.ConversationRepository
 import com.example.messagingapp.repositories.UsersRepository
-import com.example.messagingapp.utils.mapDataFromDatabase
-import io.reactivex.rxjava3.core.Observable
+import com.example.messagingapp.utils.mapConversationsWithMessagesRelationToCompleteUserDto
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.Observables
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.BehaviorSubject
-import io.reactivex.rxjava3.subjects.PublishSubject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.coroutines.coroutineContext
-import kotlin.random.Random
 
 class UsersViewModel(
     private val usersRepo: UsersRepository,
@@ -35,10 +29,10 @@ class UsersViewModel(
 
 
     // Observables used by the view model to get the users infos only
-    private val usersData: BehaviorSubject<List<UserData>> = BehaviorSubject.createDefault(listOf())
+    private val usersData: BehaviorSubject<List<UserDataDto>> = BehaviorSubject.createDefault(listOf())
 
     // Observable used by the viewmodel to get conversations only
-    private val usersConversations: BehaviorSubject<MutableList<MutableList<MessageData>>> = BehaviorSubject.createDefault(mutableListOf())
+    private val usersConversations: BehaviorSubject<MutableList<MutableList<MessageDataDto>>> = BehaviorSubject.createDefault(mutableListOf())
 
     // Observable exposed to the view to get the final data
     val completeUsersList: MutableLiveData<List<CompleteUserDto>> = MutableLiveData()
@@ -79,7 +73,7 @@ class UsersViewModel(
             val users = usersRepo.getLocalUserFromRoomDb()
             if(users.isNotEmpty()) {
                 val mappedUserFromDbToModel = users.map {
-                    mapDataFromDatabase(it)
+                    mapConversationsWithMessagesRelationToCompleteUserDto(it)
                 }
                 this@UsersViewModel.completeUsersList.postValue(mappedUserFromDbToModel)
             } else {

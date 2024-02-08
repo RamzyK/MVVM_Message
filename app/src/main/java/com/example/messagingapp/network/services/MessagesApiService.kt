@@ -1,6 +1,6 @@
 package com.example.messagingapp.network.services
 
-import com.example.messagingapp.model.conversation_model.FakeMessagesData
+import com.example.messagingapp.model.conversation_model.FakeMessagesDataDto
 import io.reactivex.rxjava3.core.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -25,5 +25,5 @@ interface MessagesApiService {
         @Query("_quantity") responseLength: Int,
         @Query("isMyMessage") isMyMessage: String,
         @Query("message") message: String
-    ): Flowable<FakeMessagesData>
+    ): Flowable<FakeMessagesDataDto>
 }

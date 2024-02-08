@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.messagingapp.R
-import com.example.messagingapp.model.conversation_model.MessageData
+import com.example.messagingapp.model.conversation_model.MessageDataDto
 import com.example.messagingapp.view.adapters.MessagesListAdapter
 import com.example.messagingapp.viewmodel.UsersViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -81,7 +81,7 @@ class ConversationDetailActivity : AppCompatActivity() {
         val currentUser = this.usersViewModel.completeUsersList.value?.firstOrNull {
             this.usersViewModel.currentUserId == it.infos.id
         }
-        currentUser?.conversations!!.add(MessageData(true, text))
+        currentUser?.conversations!!.add(MessageDataDto(true, text))
         this.conversationAdapter.updateMessagesToDisplay()
         this.conversationAdapter.notifyItemInserted(currentUser.conversations.count())
         this.messagesListRv.smoothScrollToPosition(currentUser.conversations.count() - 1)
